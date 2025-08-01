@@ -1,7 +1,6 @@
 import typer
 from rich.console import Console
 from rich.table import Table
-from rich.prompt import Prompt
 from loguru import logger
 import os
 from database import Person, configure_database, with_database, create_tables_if_not_exist

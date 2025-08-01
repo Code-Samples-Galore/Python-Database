@@ -17,7 +17,7 @@ class BaseModel(Model):
         database = database_proxy
 
 class Person(BaseModel):
-    name = CharField(max_length=100)
+    name = CharField(max_length=100, index=True)
     age = IntegerField()
 
 def configure_database(db_type='sqlite', **kwargs):
