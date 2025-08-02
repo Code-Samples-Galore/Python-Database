@@ -122,3 +122,7 @@ Run with coverage:
 ```bash
 pytest tests/ --cov=database --cov-report=html
 ```
+
+## 📄 License
+
+MIT License
