@@ -72,10 +72,6 @@ def with_database(func):
 @with_database
 def create_tables_if_not_exist():
     """Create tables if they don't exist."""
-    # Check if tables already exist
-    if database_proxy.table_exists(Person):
-        return
-
     logger.info("Creating tables if they don't exist")
     database_proxy.create_tables([Person], safe=True)
     logger.info("Tables created successfully")

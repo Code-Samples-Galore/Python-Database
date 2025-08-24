@@ -9,7 +9,7 @@ def in_memory_db():
     test_db = SqliteDatabase(':memory:', autoconnect=False)
     database_proxy.initialize(test_db)
     test_db.connect()
-    test_db.create_tables([Person])
+    test_db.create_tables([Person], safe=True)
     yield test_db
     test_db.close()
 
