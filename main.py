@@ -25,14 +25,14 @@ create_tables_if_not_exist()
 @with_database
 def create(name: str, age: int):
     """Create a new person in the database."""
-    logger.info(f"Starting person creation process with name={name}, age={age}")
+    logger.info("Starting person creation process with name={}, age={}", name, age)
 
     try:
         person = Person.create(name=name, age=age)
-        logger.info(f"Person created successfully: {person.name}, age {person.age}")
+        logger.info("Person created successfully: {}, age {}", person.name, person.age)
         console.print(f"✅ Created person: {person.name}, age {person.age}", style="green")
     except Exception as e:
-        logger.error(f"Failed to create person: {e}")
+        logger.error("Failed to create person: {}", e)
         console.print(f"❌ Failed to create person: {e}", style="red")
         raise typer.Exit(1)
 
@@ -49,7 +49,7 @@ def list():
             console.print("No persons found in the database.", style="yellow")
             return
 
-        logger.info(f"Found {len(persons)} persons in database")
+        logger.info("Found {} persons in database", len(persons))
         table = Table(title="Persons")
         table.add_column("ID", justify="right", style="cyan")
         table.add_column("Name", style="magenta")
@@ -60,7 +60,7 @@ def list():
 
         console.print(table)
     except Exception as e:
-        logger.error(f"Failed to list persons: {e}")
+        logger.error("Failed to list persons: {}", e)
         console.print(f"❌ Failed to list persons: {e}", style="red")
         raise typer.Exit(1)
 

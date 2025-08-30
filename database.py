@@ -22,7 +22,7 @@ class Person(BaseModel):
 
 def configure_database(db_type='sqlite', **kwargs):
     """Configure the database. Supports 'sqlite' or 'mysql'."""
-    logger.info(f"Configuring database: type={db_type}, kwargs={kwargs}")
+    logger.info("Configuring database: type={}, kwargs={}", db_type, kwargs)
     if db_type == 'sqlite':
         db = SqliteDatabase(kwargs.get('database', 'app.db'), autoconnect=False)
     elif db_type == 'mysql':
@@ -35,11 +35,11 @@ def configure_database(db_type='sqlite', **kwargs):
             autoconnect=False
         )
     else:
-        logger.error(f"Invalid database type: {db_type}")
+        logger.error("Invalid database type: {}", db_type)
         raise ValueError("db_type must be 'sqlite' or 'mysql'")
 
     database_proxy.initialize(db)
-    logger.info(f"Database configured successfully: {db}")
+    logger.info("Database configured successfully: {}", db)
     return db
 
 def with_database(func):
@@ -50,22 +50,22 @@ def with_database(func):
         was_closed = database_proxy.is_closed()
 
         if was_closed:
-            logger.debug(f"Opening database connection for function: {func.__name__}")
+            logger.debug("Opening database connection for function: {}", func.__name__)
             database_proxy.connect()
         else:
-            logger.debug(f"Using existing database connection for function: {func.__name__}")
+            logger.debug("Using existing database connection for function: {}", func.__name__)
 
         try:
             result = func(*args, **kwargs)
-            logger.debug(f"Function {func.__name__} executed successfully")
+            logger.debug("Function {} executed successfully", func.__name__)
             return result
         except Exception as e:
-            logger.error(f"Error in function {func.__name__}: {e}")
+            logger.error("Error in function {}: {}", func.__name__, e)
             raise
         finally:
             # Only close if we opened the connection
             if was_closed and not database_proxy.is_closed():
-                logger.debug(f"Closing database connection for function: {func.__name__}")
+                logger.debug("Closing database connection for function: {}", func.__name__)
                 database_proxy.close()
     return wrapper
 
