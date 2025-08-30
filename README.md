@@ -1,15 +1,15 @@
-# Peewee Database Example
+# 🗄️ Peewee Database Example
 
 A Python CLI application for managing a person database with support for SQLite and MySQL backends. Built with Peewee ORM, Typer CLI framework, and Rich for beautiful terminal output.
 
-## Installation
+## ⚙️ Installation
 
-### Prerequisites
+### 📋 Prerequisites
 
 - Python 3.7+
 - pip
 
-### Dependencies
+### 📦 Dependencies
 
 Install the required packages:
 
@@ -23,33 +23,33 @@ For MySQL support, also install:
 pip install PyMySQL
 ```
 
-## Usage
+## 🚀 Usage
 
-### CLI Commands
+### 🖥️ CLI Commands
 
-#### Create a Person
+#### ➕ Create a Person
 
 ```bash
 python main.py create "John Doe" 30
 ```
 
-#### List All Persons
+#### 📃 List All Persons
 
 ```bash
 python main.py list
 ```
 
-### Database Configuration
+### 🗃️ Database Configuration
 
 The application uses SQLite by default with a file named `persons.db`. You can configure different database backends in the code:
 
-#### SQLite Configuration
+#### 🐍 SQLite Configuration
 
 ```python
 configure_database('sqlite', database='my_app.db')
 ```
 
-#### MySQL Configuration
+#### 🐬 MySQL Configuration
 
 ```python
 configure_database('mysql', 
@@ -60,7 +60,7 @@ configure_database('mysql',
                   port=3306)
 ```
 
-### Database Functions
+### 🛠️ Database Functions
 
 #### `configure_database(db_type, **kwargs)`
 
@@ -86,7 +86,7 @@ def my_database_function():
 
 Creates database tables if they don't already exist.
 
-## Project Structure
+## 🗂️ Project Structure
 
 ```
 Database/
@@ -100,7 +100,7 @@ Database/
     └── database.log
 ```
 
-## Logging
+## 📝 Logging
 
 The application uses Loguru for comprehensive logging:
 
@@ -109,7 +109,7 @@ The application uses Loguru for comprehensive logging:
 
 Logs are automatically rotated (1 MB) and retained for 10 days.
 
-## Testing
+## 🧪 Testing
 
 Run the test suite:
 
