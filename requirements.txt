@@ -1,4 +1,7 @@
-pytest
-typer
-loguru
-peewee
+# pytest >= 7.0 is required for the `pythonpath` option in pytest.ini.
+pytest>=7.0
+pytest-cov>=4.0
+typer>=0.12
+rich>=13.8
+loguru>=0.7
+peewee>=3.17
