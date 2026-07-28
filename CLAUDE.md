@@ -15,7 +15,7 @@ Four modules, no package layout — everything is imported from the repo root:
 | `database.py` | `Person` model, `configure_database()`, `with_database` decorator |
 | `logging_config.py` | Single source of truth for Loguru sinks |
 | `main.py` | Typer CLI (`create`, `list`) |
-| `tests/` | `test_database.py`, `test_main.py` |
+| `tests/` | `test_database.py`, `test_main.py`, `test_logging_config.py` |
 
 ## Commands
 
@@ -61,6 +61,11 @@ not in `database.py` or `main.py`.
 
 `configure_database()` logs its kwargs, so it runs them through `_redact()`
 first. If you add a credential-bearing keyword, add its name to `_SECRET_KEYS`.
+
+`DEFAULT_LOG_DIR` is derived from `CODE_DIR` (the directory holding
+`logging_config.py`), so `logs/` sits beside the source rather than following
+the working directory. Keep the default absolute — a bare `"logs"` scatters log
+files wherever the CLI happens to be run from.
 
 ### Deliberate choices — don't undo these
 

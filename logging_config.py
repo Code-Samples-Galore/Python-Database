@@ -14,7 +14,11 @@ import sys
 
 from loguru import logger
 
-DEFAULT_LOG_DIR = os.environ.get("LOG_DIR", "logs")
+# Anchor the log directory to the code, not the working directory, so logs
+# always land in one place regardless of where the CLI is invoked from.
+CODE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DEFAULT_LOG_DIR = os.environ.get("LOG_DIR", os.path.join(CODE_DIR, "logs"))
 DEFAULT_LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 
 # Records emitted from these modules go to database.log; everything else

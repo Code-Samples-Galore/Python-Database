@@ -136,6 +136,7 @@ Python-Database/
 ├── tests/
 │   ├── conftest.py      # Redirects test logs away from logs/
 │   ├── test_database.py # Model, connection and validation tests
+│   ├── test_logging_config.py # Log routing and log-directory tests
 │   └── test_main.py     # CLI tests
 └── logs/                # Application logs (created automatically, gitignored)
     ├── app.log
@@ -149,6 +150,9 @@ The application uses Loguru for comprehensive logging:
 - **Application logs**: `logs/app.log` — records emitted by the CLI
 - **Database logs**: `logs/database.log` — records emitted by `database.py`
 
+`logs/` sits next to the source files, not in the current working directory, so
+logs always land in the same place no matter where the CLI is invoked from.
+
 Loguru's `logger` is a single process-wide object, so every sink receives every
 record unless it is filtered. `logging_config.setup_logging()` applies that
 filter, configures a stderr sink, and is idempotent so repeated imports do not
@@ -161,7 +165,7 @@ Two environment variables adjust logging:
 | Variable | Default | Effect |
 | --- | --- | --- |
 | `LOG_LEVEL` | `INFO` | Minimum level for the console and file sinks |
-| `LOG_DIR` | `logs` | Directory the log files are written to |
+| `LOG_DIR` | `logs/` beside the source | Directory the log files are written to |
 
 Database passwords are redacted before being logged.
 
